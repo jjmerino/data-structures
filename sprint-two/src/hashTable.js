@@ -1,40 +1,33 @@
 var HashTable = function(){
   this._limit = 8;
   this._storage = makeLimitedArray(this._limit);
-  this._conflicts = {};
 };
 
 HashTable.prototype.insert = function(k, v){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  var counter = 0;
-  while (counter <= this._limit) {
 
-    if (this._storage.get(i) === undefined || this._storage.get(i) === null) {
-      break;
-    }
-
-    i = (i + 1) % this._limit;
-    counter++;
+  var bucket = this._storage.get(i);
+  if (bucket === undefined || bucket === null) {
+    bucket = {};
+    this._storage.set(i, bucket);
   }
 
-  if (counter > this._limit) {
-    throw new Error('Error happened!');
-  }
-  this._conflicts[k] = i;
-  this._storage.set(i, v);
+  bucket[k] = v;
 };
 
 HashTable.prototype.retrieve = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  if (this._conflicts[k] !== undefined) {
-    i = this._conflicts[k];
-  }
-  return this._storage.get(i);
+  var bucket = this._storage.get(i);
+  return bucket[k];
 };
 
 HashTable.prototype.remove = function(k){
   var i = getIndexBelowMaxForKey(k, this._limit);
-  this._storage.set(i, null);
+  var bucket = this._storage.get(i);
+  if (bucket === undefined || bucket === null) {
+    return;
+  }
+  bucket[k] = null;
 };
 
 /*

@@ -41,22 +41,6 @@ describe('hashTable', function() {
     window.getIndexBelowMaxForKey = oldHashFunction;
   });
 
-  it('should throw an error when collision occurs more than the limit of hashTable function', function(){
-    var oldHashFunction = window.getIndexBelowMaxForKey;
-    window.getIndexBelowMaxForKey = function() { return 0; };
-    hashTable.insert("val", "val");
-    hashTable.insert("val", "val");
-    hashTable.insert("val", "val");
-    hashTable.insert("val", "val");
-    hashTable.insert("val", "val");
-    hashTable.insert("val", "val");
-    hashTable.insert("val", "val");
-    hashTable.insert("val", "val");
-    expect(function() {
-      hashTable.insert("val", "val");
-    }).to.throw();
-  });
-
   // (Extra credit! Remove the extra "x" when you want the following tests to run)
   xit('should double in size when needed', function() {
     _.each(people, function(person) {
