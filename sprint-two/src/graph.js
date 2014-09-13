@@ -59,6 +59,7 @@ Graph.prototype.addEdge = function(fromNode, toNode){
   if(realFromNode === undefined || realToNode === undefined){
     return;
   }
+
   realFromNode.edges[toNode] = true;
   realToNode.edges[fromNode] = true;
 };
@@ -75,7 +76,7 @@ Graph.prototype.removeEdge = function(fromNode, toNode){
 
   var that = this;
   _.each([fromNode,toNode],function(theNode){
-    var theNodeHasEdges = _.some(that.nodes,function(item){
+    var theNodeHasEdges = _.some(that.nodes,  function(item){
       return item.edges[theNode] !== undefined;
     });
 

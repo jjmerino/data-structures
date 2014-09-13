@@ -8,6 +8,8 @@ HashTable.prototype.insert = function(k, v){
 
   var bucket = this._storage.get(i);
   if (bucket === undefined || bucket === null) {
+
+    // TODO: may want to implement it as an array.1
     bucket = {};
     this._storage.set(i, bucket);
   }

@@ -1,4 +1,4 @@
-var makeTree = function(value){
+ var makeTree = function(value){
   var newTree = _.extend({},treeMethods);
   newTree.value = value;
   newTree.children = undefined;
