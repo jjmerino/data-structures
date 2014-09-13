@@ -19,36 +19,30 @@ var makeLinkedList = function(){
       list.head = newNode;
     }
 
-    if(list.tail!==null){
-      list.tail.next =  newNode;
+    if(list.tail !== null){
+      list.tail.next = newNode;
     }
     list.tail = newNode;
   };
 
   list.removeHead = function(){
-
-    if(list.head===null){
+    if(list.head === null){
       return;
     }
     var value = list.head.value;
     list.head= list.head.next;
     return value;
-
   };
 
   list.contains = function(target){
     var node = list.head;
 
-    if(node===null){
-      return false;
-    }
-
-    do{
-      if(node.value===target){
+    while(node !== null){
+      if(node.value === target){
         return true;
       }
       node = node.next;
-    }while(node!==null);
+    }
 
     return false;
   };
